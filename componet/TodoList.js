@@ -15,8 +15,10 @@ function TodoList({ todos, filter, filters }){
             <label for="toggle-all">Mark all as complete</label>
             <ul class="todo-list">
                 ${todos
-                    .filter(filters[filter])
-                    .map((todo,index) => TodoItem({ todo, index }))}
+                    .map((todo,index) => {
+                        if(filters[filter](todo))
+                            return TodoItem({ todo, index })
+                    })}
             </ul>
         </section>
     `;
